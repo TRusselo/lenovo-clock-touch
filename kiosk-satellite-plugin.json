@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "apiVersion": 1,
+  "id": "lenovo-clock-touch",
+  "name": "Lenovo Clock Touch",
+  "version": "0.1.1",
+  "minAndroidSdk": 26,
+  "minAppVersion": "2026.11.25",
+  "entryClass": "lenovotouch.LenovoClockTouchPlugin",
+  "description": "Exposes single, double, and triple taps detected by the Lenovo Smart Clock Gen 1 accelerometer (Bosch BMA253) as Kiosk Satellite gesture triggers, with configurable sensitivity, multi-tap timing, and a live tap tester. Configure tap actions in Settings > Gestures > Add Gesture > Plugin Trigger.",
+  "author": "TRusselo",
+  "license": "MIT",
+  "capabilities": [
+    "overlay",
+    "entities",
+    "native"
+  ],
+  "triggers": [
+    {
+      "id": "singleTap",
+      "title": "Single tap"
+    },
+    {
+      "id": "doubleTap",
+      "title": "Double tap"
+    },
+    {
+      "id": "tripleTap",
+      "title": "Triple tap"
+    }
+  ],
+  "commands": [],
+  "settings": [
+    {
+      "key": "sensitivity",
+      "type": "number",
+      "title": "Tap sensitivity",
+      "group": "Tap Detection",
+      "default": 7,
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "description": "1 = firmest tap, 10 = lightest tap (7 = stock 375 mg)."
+    },
+    {
+      "key": "tapWindowMs",
+      "type": "number",
+      "title": "Tap timing window",
+      "group": "Tap Detection",
+      "default": 450,
+      "min": 150,
+      "max": 1000,
+      "step": 25,
+      "unit": "ms",
+      "description": "How long to wait for a 2nd or 3rd tap before firing the gesture. Shorter feels faster; longer makes double and triple taps easier."
+    },
+    {
+      "key": "pauseGesturesInTester",
+      "type": "boolean",
+      "title": "Pause gestures while testing on this page",
+      "group": "Tap Tester",
+      "default": true,
+      "description": "While this settings page is open, taps update the tester below without triggering your mapped Gestures."
+    }
+  ],
+  "groups": [
+    {
+      "title": "Tap Detection",
+      "readingsTitle": "Sensor",
+      "readings": [
+        "text_sensor.sensor_status",
+        "text_sensor.root_setup"
+      ]
+    },
+    {
+      "title": "Tap Tester",
+      "readingsTitle": "Live Result",
+      "readings": [
+        "text_sensor.tap_tester"
+      ]
+    }
+  ]
+}
